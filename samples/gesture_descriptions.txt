@@ -1,0 +1,4 @@
+COOK: rotation the wrist, kind of like as if you were whipping a whisk. usb port of the arduino pointing towards your arm
+
+FLICKUP: usb port of arduino pointing towards you, rotate about the end of the board (part pointing towards tou), such that you are kind of drawing a line up and down on the wall in front of you.
+It is kind of slowish
