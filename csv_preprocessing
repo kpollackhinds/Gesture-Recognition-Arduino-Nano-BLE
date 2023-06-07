@@ -1,0 +1,76 @@
+import pandas as pd
+import numpy as np
+# from sklearn.preprocessing import OneHotEncoder
+
+cook_df = pd.read_csv('./samples/cook.csv')
+flick_df = pd.read_csv('./samples/flickup.csv')
+
+#getting rid of last 5 elements from cook_df
+cook_df = cook_df[0:len(cook_df)-5]
+
+#cook_df.head()
+#flick_df.head()
+
+cook_df['Time'] = cook_df['Time'].astype(float)
+flick_df['Time'] = flick_df['Time'].astype(float)
+
+cook_df = cook_df.drop(columns = ['Gx', 'Gy', 'Gz'])
+flick_df = flick_df.drop(columns = ['Gx', 'Gy', 'Gz'])
+
+cook_df['Class'] = 'cook'
+flick_df['Class'] = 'flick'
+
+train_cook_df = cook_df[0:int(len(cook_df)*.8)]
+test_cook_df = cook_df[int(len(cook_df)*.8):]
+
+train_flick_df = flick_df[0:int(len(flick_df)*.8)]
+test_flick_df = flick_df[int(len(flick_df)*.8):]
+
+def formatData(X,Y, window):
+    Xarr = []
+    Yarr = []
+
+    for i in range(0, len(X) - window, window/2):
+        Xarr.append(X.iloc[i:i+window].values)  
+        Yarr.append(Y.iloc[0])
+
+    return np.array(Xarr), np.array(Yarr)
+
+window = 60
+#We have our two df with equal amounts of data.
+#We need to split our data into test and train
+
+
+train_df = pd.concat([cook_df[0:int(len(cook_df)*.8)], flick_df[0:int(len(flick_df)*.8)]])
+test_df = pd.concat([cook_df[int(len(cook_df)*.8):], flick_df[int(len(flick_df)*.8):]])
+
+def makeDataset(X, Y, window):
+
+    return
+
+
+
+
+
+
+
+
+
+
+
+
+# # cook_df.info()
+# #flick_df.info()
+# cook_x = cook_df["Ax"].to_numpy()
+# cook_y = cook_df["Ay"].to_numpy()
+# cook_z = cook_df["Az"].to_numpy()
+# cook_t = cook_df["Time"].to_numpy()
+
+# flick_x = flick_df["Ax"].to_numpy()
+# flick_y = flick_df["Ay"].to_numpy()
+# flick_z = flick_df["Az"].to_numpy()
+# flick_t = flick_df["Time"].to_numpy()
+
+
+
+
