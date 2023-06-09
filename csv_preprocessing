@@ -6,13 +6,22 @@ cook_df = pd.read_csv('./samples/cook.csv')
 flick_df = pd.read_csv('./samples/flickup.csv')
 
 #getting rid of last 5 elements from cook_df
-cook_df = cook_df[0:len(cook_df)-5]
+flick_df = flick_df[0:len(flick_df)-10]
+
+#since one second is about 118 rows, im getting rid of the extra rows that would make it evenly divisible
+cook_df = cook_df[0:len(cook_df)-len(cook_df)%118]
+flick_df = flick_df[0:len(flick_df)-len(flick_df)%118]
+
+print(cook_df.info())
+print(flick_df.info())
 
 #cook_df.head()
 #flick_df.head()
 
 cook_df['Time'] = cook_df['Time'].astype(float)
 flick_df['Time'] = flick_df['Time'].astype(float)
+
+cook_df.info()
 
 cook_df = cook_df.drop(columns = ['Gx', 'Gy', 'Gz'])
 flick_df = flick_df.drop(columns = ['Gx', 'Gy', 'Gz'])
@@ -30,13 +39,17 @@ def formatData(X,Y, window):
     Xarr = []
     Yarr = []
 
-    for i in range(0, len(X) - window, window/2):
+    for i in range(0, len(X) - window, int(window/2)):
         Xarr.append(X.iloc[i:i+window].values)  
         Yarr.append(Y.iloc[0])
 
     return np.array(Xarr), np.array(Yarr)
 
-window = 60
+window = 49 #selected based on length of df and number of rows per second
+
+X_train, Y_train = formatData(train_cook_df[['Ax', 'Ay', 'Az']], train_cook_df[['Class']], window)
+
+print(X_train)
 #We have our two df with equal amounts of data.
 #We need to split our data into test and train
 
@@ -44,9 +57,9 @@ window = 60
 train_df = pd.concat([cook_df[0:int(len(cook_df)*.8)], flick_df[0:int(len(flick_df)*.8)]])
 test_df = pd.concat([cook_df[int(len(cook_df)*.8):], flick_df[int(len(flick_df)*.8):]])
 
-def makeDataset(X, Y, window):
+# def makeDataset(X, Y, window):
 
-    return
+#     return
 
 
 
