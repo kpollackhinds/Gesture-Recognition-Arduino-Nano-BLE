@@ -47,42 +47,31 @@ def formatData(X,Y, window):
 
 window = 49 #selected based on length of df and number of rows per second
 
-X_train, Y_train = formatData(train_cook_df[['Ax', 'Ay', 'Az']], train_cook_df[['Class']], window)
+#test data 
+X_train1, Y_train1 = formatData(train_cook_df[['Ax', 'Ay', 'Az']], train_cook_df[['Class']], window)
+X_train2, Y_train2 = formatData(train_flick_df[['Ax', 'Ay', 'Az']], train_flick_df[['Class']], window)
 
-print(X_train)
-#We have our two df with equal amounts of data.
-#We need to split our data into test and train
-
-
-train_df = pd.concat([cook_df[0:int(len(cook_df)*.8)], flick_df[0:int(len(flick_df)*.8)]])
-test_df = pd.concat([cook_df[int(len(cook_df)*.8):], flick_df[int(len(flick_df)*.8):]])
-
-# def makeDataset(X, Y, window):
-
-#     return
+#train data
+X_test1, Y_test1 = formatData(test_cook_df[['Ax', 'Ay', 'Az']], test_cook_df[['Class']], window)
+X_test2, Y_test2 = formatData(test_flick_df[['Ax', 'Ay', 'Az']], test_flick_df[['Class']], window)
 
 
+#manually encoding because i didnt do it earlier and it would be a pain to go back. 
+#will change when i add more classes
+for i in range(len(Y_train1)):
+    Y_train1[i] = 0
+    Y_train2[i] = 1
 
+for i in range(len(Y_test1)):
+    Y_test1[i] = 0
+    Y_test2[i] = 1
 
+X_train_final = np.concatenate((X_train1, X_train2))
+Y_train_final = np.concatenate((Y_train1, Y_train2))
 
+X_test_final = np.concatenate((X_test1, X_test2))
+Y_test_final = np.concatenate((Y_test1, Y_test2))
 
-
-
-
-
-
-
-# # cook_df.info()
-# #flick_df.info()
-# cook_x = cook_df["Ax"].to_numpy()
-# cook_y = cook_df["Ay"].to_numpy()
-# cook_z = cook_df["Az"].to_numpy()
-# cook_t = cook_df["Time"].to_numpy()
-
-# flick_x = flick_df["Ax"].to_numpy()
-# flick_y = flick_df["Ay"].to_numpy()
-# flick_z = flick_df["Az"].to_numpy()
-# flick_t = flick_df["Time"].to_numpy()
 
 
 
