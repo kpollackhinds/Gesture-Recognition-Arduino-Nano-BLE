@@ -1,6 +1,10 @@
 import pandas as pd
 import numpy as np
+
+# from tensorflow import keras
+import matplotlib.pyplot as plt
 # from sklearn.preprocessing import OneHotEncoder
+
 
 cook_df = pd.read_csv('./samples/cook.csv')
 flick_df = pd.read_csv('./samples/flickup.csv')
@@ -73,6 +77,6 @@ X_test_final = np.concatenate((X_test1, X_test2))
 Y_test_final = np.concatenate((Y_test1, Y_test2))
 
 
-
+print(np.shape(X_train_final))
 
 
