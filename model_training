@@ -22,19 +22,19 @@ flick_df = flick_df[0:len(flick_df)-len(flick_df)%118]
 print(cook_df.info())
 print(flick_df.info())
 
-#cook_df.head()
-#flick_df.head()
 
 cook_df['Time'] = cook_df['Time'].astype(float)
 flick_df['Time'] = flick_df['Time'].astype(float)
 
-cook_df.info()
 
 cook_df = cook_df.drop(columns = ['Gx', 'Gy', 'Gz'])
 flick_df = flick_df.drop(columns = ['Gx', 'Gy', 'Gz'])
 
 cook_df['Class'] = 'cook'
 flick_df['Class'] = 'flick'
+
+cook_df.info()
+flick_df.info()
 
 train_cook_df = cook_df[0:int(len(cook_df)*.9)]
 test_cook_df = cook_df[int(len(cook_df)*.9):]
