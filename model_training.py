@@ -3,8 +3,8 @@ import numpy as np
 
 #if running in collab will need to import tensorflow: reference other file -->
 # import tensorflow as tf
-import keras
-from keras import layers
+# import keras
+# from keras import layers
 import matplotlib.pyplot as plt
 # from sklearn.preprocessing import OneHotEncoder
 
@@ -81,36 +81,36 @@ Y_test_final = np.concatenate((Y_test1, Y_test2))
 
 
 print(np.shape(X_train_final))
+print(Y_train_final)
+# #model will be sequential, (feed forward type of thing exept for the LSTM layer)
+# model = keras.Sequential()
 
-#model will be sequential, (feed forward type of thing exept for the LSTM layer)
-model = keras.Sequential()
+# #add bidirection lstm layer
+# model.add(
+#     keras.layers.Bidirectional(
+#         keras.layers.LSTM(
+#             units=128,
+#             input_shape = [X_train_final.shape[1], X_train_final.shape[2]]
+#         )
+#     )
+# )
 
-#add bidirection lstm layer
-model.add(
-    keras.layers.Bidirectional(
-        keras.layers.LSTM(
-            units=128,
-            input_shape = [X_train_final.shape[1], X_train_final.shape[2]]
-        )
-    )
-)
+# #adding a dropout layer (prevents overfitting - look it up)
+# model.add(keras.layer.Dropout(rate=0.5))
 
-#adding a dropout layer (prevents overfitting - look it up)
-model.add(keras.layer.Dropout(rate=0.5))
+# #dense layer is the layer of nodes
+# model.add(keras.layers.Dense(units=128, activation='relu'))
 
-#dense layer is the layer of nodes
-model.add(keras.layers.Dense(units=128, activation='relu'))
+# #this layer will return the output prediction. Softmax puts "confidence" between 0 and 1
+# model.add(keras.layers.Dense(Y_train_final.shape[1], activation='softmax'))
 
-#this layer will return the output prediction. Softmax puts "confidence" between 0 and 1
-model.add(keras.layers.Dense(Y_train_final.shape[1], activation='softmax'))
+# model.compile(loss='categorical_crossentrropy', optimizer='adam', metrics=['acc'])
 
-model.compile(loss='categorical_crossentrropy', optimizer='adam', metrics=['acc'])
-
-#batch size will be played around with bc my data is small :/
-trained_model = model.fit(
-    X_train_final, Y_train_final,
-    epochs =20,
-    batch_size=16,
-    validation_split= 0.1,
-    shuffle=True
-)
+# #batch size will be played around with bc my data is small :/
+# trained_model = model.fit(
+#     X_train_final, Y_train_final,
+#     epochs =20,
+#     batch_size=16,
+#     validation_split= 0.1,
+#     shuffle=True
+# )
